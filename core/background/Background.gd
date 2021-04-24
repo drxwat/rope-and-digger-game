@@ -1,4 +1,5 @@
 extends Sprite
+class_name Background
 
 signal screen_exited
 

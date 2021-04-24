@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Sprite",
+"class": "Background",
+"language": "GDScript",
+"path": "res://core/background/Background.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Coin",
+"language": "GDScript",
+"path": "res://core/coin/Coin.gd"
+} ]
 _global_script_class_icons={
-
+"Background": "",
+"Coin": ""
 }
 
 [application]
@@ -65,10 +76,15 @@ move_right={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [layer_names]
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="platforms"
+2d_physics/layer_3="pickups"
 2d_physics/layer_9="walls"
 
 [physics]

@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/platform.png" type="Texture" id=1]
+[ext_resource path="res://core/platforms/platform-simple/PlatformSimple.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 108, 36 )
 
 [node name="PlatformSimple" type="KinematicBody2D"]
 collision_layer = 2
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 4.5, 4.5 )
@@ -16,3 +18,8 @@ region_rect = Rect2( 0, 0, 48, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -105, -35 )
+rect = Rect2( 0, 0, 210, 70 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="on_screen_exited"]
