@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://level/main-level/MainLevel.gd" type="Script" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://core/coin/Coin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://core/platforms/platform-simple/PlatformSimple.tscn" type="PackedScene" id=4]
 [ext_resource path="res://core/background/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://core/ui/hud/HUD.tscn" type="PackedScene" id=6]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource( 1 )
-platform_spawn_time = 1
+platform_spawn_time = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="Backgrounds" type="Node2D" parent="."]
 
@@ -21,22 +26,21 @@ position = Vector2( 0, 1080 )
 position = Vector2( 0, 2160 )
 
 [node name="Platforms" type="Node2D" parent="."]
-position = Vector2( 110.532, 807.074 )
 
 [node name="PlatformSimple" parent="Platforms" instance=ExtResource( 4 )]
-position = Vector2( 26.9448, 949.056 )
+position = Vector2( 126.358, 1192.75 )
 
 [node name="Coin" parent="Platforms/PlatformSimple" instance=ExtResource( 3 )]
-position = Vector2( -15.8957, -98.8461 )
+position = Vector2( 0, -80 )
 
 [node name="PlatformSimple2" parent="Platforms" instance=ExtResource( 4 )]
-position = Vector2( 427.525, 1495.14 )
+position = Vector2( 553.883, 1738.83 )
 
 [node name="Coin2" parent="Platforms/PlatformSimple2" instance=ExtResource( 3 )]
 position = Vector2( -15.3423, -97.5503 )
 
 [node name="PlatformSimple3" parent="Platforms" instance=ExtResource( 4 )]
-position = Vector2( 43.5608, 2095.26 )
+position = Vector2( 169.919, 2338.95 )
 
 [node name="Coin3" parent="Platforms/PlatformSimple3" instance=ExtResource( 3 )]
 position = Vector2( -54.2986, -89.459 )
@@ -45,7 +49,7 @@ position = Vector2( -54.2986, -89.459 )
 position = Vector2( 45.5677, -89.4595 )
 
 [node name="PlatformSimple4" parent="Platforms" instance=ExtResource( 4 )]
-position = Vector2( 458.224, 2649.25 )
+position = Vector2( 584.582, 2892.94 )
 
 [node name="Coin3" parent="Platforms/PlatformSimple4" instance=ExtResource( 3 )]
 position = Vector2( -54.2986, -89.459 )
@@ -55,7 +59,7 @@ position = Vector2( 45.5677, -89.4595 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 360.278, 902.884 )
-gravity = 500
+gravity = 300
 
 [node name="Timers" type="Node" parent="."]
 
@@ -65,4 +69,5 @@ autostart = true
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background3" to="." method="move_bg_to_bottom"]
+[connection signal="coin_collected" from="Player" to="CanvasLayer/HUD" method="update_coins_counter"]
 [connection signal="timeout" from="Timers/PlatformTimer" to="." method="spawn_platform"]

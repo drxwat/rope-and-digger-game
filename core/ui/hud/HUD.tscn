@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://core/ui/hud/HUD.gd" type="Script" id=1]
+[ext_resource path="res://core/ui/coin-counter/CoinCounter.tscn" type="PackedScene" id=2]
+
+[node name="HUD" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = -25.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="VBoxContainer" parent="."]
+margin_right = 670.0
+margin_bottom = 999.0
+
+[node name="Row1" type="HBoxContainer" parent="Grid"]
+margin_right = 670.0
+margin_bottom = 39.0
+
+[node name="CoinCounter" parent="Grid/Row1" instance=ExtResource( 2 )]

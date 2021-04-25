@@ -17,6 +17,7 @@ enum PlatfromsTypes { SIMPLE }
 var platforms = {
 	PlatfromsTypes.SIMPLE: preload("res://core/platforms/platform-simple/PlatformSimple.tscn")
 }
+var coin_scene = preload("res://core/coin/Coin.tscn")
 
 func _ready():
 	rng.randomize()
@@ -31,11 +32,26 @@ func move_bg_to_bottom(background: Background):
 	bottom_bg = background
 	
 func spawn_platform():
+	var platform = _place_random_platrom()
+	_place_coin_on_platform(platform)
+	
+func _place_random_platrom() -> Node2D:
 	var platform =  platforms[PlatfromsTypes.SIMPLE].instance()
 	var distance_to_player = bottom_bg.position.y - player.position.y
 	var margin_bottom = player_to_bottom_bg_normal_dist - distance_to_player
 	var platform_y_position = margin_bottom + bottom_bg.position.y
 	platform.position = Vector2(0, platform_y_position)
 	platforms_container.add_child(platform)
-	var margin_side = platform.width
-	platform.position.x = rng.randf_range(0, bg_width - margin_side)
+	var margin_side = platform.width / 2
+	platform.position.x = rng.randf_range(margin_side, bg_width - margin_side)
+	return platform
+
+func _place_coin_on_platform(platform: Node2D):
+	var coins_amount = rng.randi_range(0, 1)
+	if coins_amount == 0:
+		return
+	var coin = coin_scene.instance()
+	platform.add_child(coin)
+	coin.position = Vector2(0, -80)
+	
+	

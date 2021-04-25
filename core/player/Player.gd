@@ -1,29 +1,41 @@
 extends KinematicBody2D
 
+signal coin_collected
+signal hp_changed
+
 export var speed := 300
 export var gravity := 250
+export var max_hp := 3
 
-onready var char_sprite := $AnimatedSprite
+onready var char_sprite := $GFX/AnimatedSprite
 onready var camera := $CamaraContainer/Camera2D
+onready var gfx := $GFX
+onready var gfx_scale = gfx.scale.x
 onready var center_position := position.x
 
 var top_direction = Vector2(0, -1)
 var last_tap_action = null
 var coins := 0
+var hp := max_hp
+
+func _ready():
+	emit_signal("hp_changed", hp)
 
 func _physics_process(delta):
 	var move_dir := Vector2(0, gravity)
 	if Input.is_action_pressed("move_left"):
 		move_dir += Vector2(-speed, 0)
-		char_sprite.flip_h = false
+		gfx.scale.x = gfx_scale
+#		char_sprite.flip_h = false
 	elif Input.is_action_pressed("move_right"):
 		move_dir += Vector2(speed, 0)
-		char_sprite.flip_h = true		
+		gfx.scale.x = -gfx_scale
+#		char_sprite.flip_h = true
 
-	if is_on_floor() and move_dir.x == 0:
-		char_sprite.play("idle")
+	if is_on_floor() and move_dir.x != 0:
+		char_sprite.play("run")
 	else:
-		char_sprite.stop()
+		char_sprite.play("idle")
 	
 	if is_on_floor():
 		camera.position += Vector2(0, gravity / 2 * delta)
@@ -36,7 +48,7 @@ func pick_up(body: Node2D):
 	if body is Coin:
 		body.pick_up()
 		coins += 1
-		print(coins)
+		emit_signal("coin_collected", coins)
 
 func _input(event):
 	if last_tap_action and event is InputEventMouseMotion:
