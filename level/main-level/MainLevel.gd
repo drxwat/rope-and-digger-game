@@ -1,6 +1,7 @@
 extends Node2D
 
 export var platform_spawn_time := 3
+export var spikes_probability := 0.3
 
 onready var bg1 : Background = $Backgrounds/Background1
 onready var bottom_bg : Background = $Backgrounds/Background3
@@ -18,6 +19,8 @@ var platforms = {
 	PlatfromsTypes.SIMPLE: preload("res://core/platforms/platform-simple/PlatformSimple.tscn")
 }
 var coin_scene = preload("res://core/coin/Coin.tscn")
+var spikes_scene = preload("res://core/spikes/Spikes.tscn")
+var bat_sceene = preload("res://core/bat/Bat.tscn")
 
 func _ready():
 	rng.randomize()
@@ -34,6 +37,17 @@ func move_bg_to_bottom(background: Background):
 func spawn_platform():
 	var platform = _place_random_platrom()
 	_place_coin_on_platform(platform)
+	_place_spikes_on_platform(platform)
+	
+func spawn_bat():
+	var bat = bat_sceene.instance()
+	var y_position = get_viewport().size.y
+	bat.position = Vector2(500, player.position.y + (y_position / 2) - 100)
+	add_child(bat)
+	print(bat.position)
+	print(player.position)
+	
+	
 	
 func _place_random_platrom() -> Node2D:
 	var platform =  platforms[PlatfromsTypes.SIMPLE].instance()
@@ -53,5 +67,16 @@ func _place_coin_on_platform(platform: Node2D):
 	var coin = coin_scene.instance()
 	platform.add_child(coin)
 	coin.position = Vector2(0, -80)
+	
+func _place_spikes_on_platform(platform: Node2D):
+	var place_spikes = rng.randf_range(0, 1) <= spikes_probability
+	if not place_spikes:
+		return
+	var spikes1 = spikes_scene.instance()
+	var spikes2 = spikes_scene.instance()
+	platform.add_child(spikes1)
+	platform.add_child(spikes2)
+	spikes1.position = Vector2(-platform.width / 4, -35)
+	spikes2.position = Vector2(platform.width / 4, -35)
 	
 	

@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 signal coin_collected
 signal hp_changed
@@ -12,11 +13,15 @@ onready var camera := $CamaraContainer/Camera2D
 onready var gfx := $GFX
 onready var gfx_scale = gfx.scale.x
 onready var center_position := position.x
+onready var audio_player := $AudioStreamPlayer2D
+onready var animation_player := $AnimationPlayer
 
 var top_direction = Vector2(0, -1)
 var last_tap_action = null
 var coins := 0
 var hp := max_hp
+var take_damage_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_Damage.wav")
+var is_invulnarable := false
 
 func _ready():
 	emit_signal("hp_changed", hp)
@@ -43,12 +48,28 @@ func _physics_process(delta):
 		 camera.position += Vector2(0, - gravity / 4 * delta)
 	
 	move_and_slide(move_dir, top_direction)
+	
+func take_damage():
+	if is_invulnarable:
+		return
+	hp -= 1
+	_play_sfx(take_damage_sfx)
+	emit_signal("hp_changed", hp)
+	is_invulnarable = true
+	animation_player.play("take_damage")
+	var animation_name = yield(animation_player, "animation_finished")
+	if animation_name == "take_damage":
+		is_invulnarable = false
 
 func pick_up(body: Node2D):
 	if body is Coin:
 		body.pick_up()
 		coins += 1
 		emit_signal("coin_collected", coins)
+		
+func _play_sfx(stream: AudioStream):
+	audio_player.stream = stream
+	audio_player.play()
 
 func _input(event):
 	if last_tap_action and event is InputEventMouseMotion:

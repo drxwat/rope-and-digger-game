@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Coin",
 "language": "GDScript",
 "path": "res://core/coin/Coin.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://core/player/Player.gd"
 } ]
 _global_script_class_icons={
 "Background": "",
-"Coin": ""
+"Coin": "",
+"Player": ""
 }
 
 [application]
@@ -85,6 +91,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_1="player"
 2d_physics/layer_2="platforms"
 2d_physics/layer_3="pickups"
+2d_physics/layer_4="spikes"
 2d_physics/layer_9="walls"
 
 [physics]

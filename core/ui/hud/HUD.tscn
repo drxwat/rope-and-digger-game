@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://core/ui/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://core/ui/coin-counter/CoinCounter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://core/ui/hp-bar/HPBar.tscn" type="PackedScene" id=3]
 
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
@@ -22,4 +23,8 @@ margin_bottom = 999.0
 margin_right = 670.0
 margin_bottom = 39.0
 
+[node name="HPBar" parent="Grid/Row1" instance=ExtResource( 3 )]
+margin_right = 0.0
+
 [node name="CoinCounter" parent="Grid/Row1" instance=ExtResource( 2 )]
+margin_left = 4.0

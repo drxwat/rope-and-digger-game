@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://level/main-level/MainLevel.gd" type="Script" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://core/platforms/platform-simple/PlatformSimple.tscn" type="PackedScene" id=4]
 [ext_resource path="res://core/background/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://core/ui/hud/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://core/spikes/Spikes.tscn" type="PackedScene" id=7]
+[ext_resource path="res://core/bat/Bat.tscn" type="PackedScene" id=8]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,6 +50,12 @@ position = Vector2( -54.2986, -89.459 )
 [node name="Coin4" parent="Platforms/PlatformSimple3" instance=ExtResource( 3 )]
 position = Vector2( 45.5677, -89.4595 )
 
+[node name="Spikes" parent="Platforms/PlatformSimple3" instance=ExtResource( 7 )]
+position = Vector2( -67.268, -33.2188 )
+
+[node name="Spikes2" parent="Platforms/PlatformSimple3" instance=ExtResource( 7 )]
+position = Vector2( 53.15, -35 )
+
 [node name="PlatformSimple4" parent="Platforms" instance=ExtResource( 4 )]
 position = Vector2( 584.582, 2892.94 )
 
@@ -66,8 +74,16 @@ gravity = 300
 [node name="PlatformTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
 autostart = true
+
+[node name="BatTimer" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="Bat" parent="." instance=ExtResource( 8 )]
+position = Vector2( 529.699, 1427.5 )
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background3" to="." method="move_bg_to_bottom"]
 [connection signal="coin_collected" from="Player" to="CanvasLayer/HUD" method="update_coins_counter"]
+[connection signal="hp_changed" from="Player" to="CanvasLayer/HUD" method="update_hp"]
 [connection signal="timeout" from="Timers/PlatformTimer" to="." method="spawn_platform"]
+[connection signal="timeout" from="Timers/BatTimer" to="." method="spawn_bat"]

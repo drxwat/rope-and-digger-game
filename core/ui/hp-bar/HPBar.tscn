@@ -1,14 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/heart_full.png" type="Texture" id=1]
+[ext_resource path="res://core/ui/hp-bar/HPBar.gd" type="Script" id=2]
 
 [node name="HPBar" type="HBoxContainer"]
 margin_right = 39.0
 margin_bottom = 39.0
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 39.0
-margin_bottom = 39.0
-rect_min_size = Vector2( 39, 39 )
-texture = ExtResource( 1 )
-stretch_mode = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
