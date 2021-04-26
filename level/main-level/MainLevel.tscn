@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://level/main-level/MainLevel.gd" type="Script" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://core/ui/pause-overlay/PauseOverlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://core/ui/dead-overlay/DeadOverlay.tscn" type="PackedScene" id=9]
 [ext_resource path="res://core/ui/level-overlay/NewLevelOverLay.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sfx_and_music/Bunnymajs - So Close.ogg" type="AudioStream" id=11]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -60,6 +61,10 @@ position = Vector2( 360.278, 902.884 )
 
 [node name="BatTimer" type="Timer" parent="Timers"]
 wait_time = 6.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]
