@@ -33,8 +33,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Rope&Digger"
-run/main_scene="res://level/main-level/MainLevel.tscn"
+run/main_scene="res://level/start-screen/StartScreen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://core/Global.gd"
 
 [display]
 
