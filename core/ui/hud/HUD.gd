@@ -7,5 +7,4 @@ func update_coins_counter(value: int):
 	coin_counter.set_coins_amount(value)
 
 func update_hp(value: int):
-	print(value)
 	hp_bar.update_health(value)

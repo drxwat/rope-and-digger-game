@@ -5,7 +5,7 @@ signal coin_collected
 signal hp_changed
 
 export var speed := 300
-export var gravity := 250
+export var gravity := 350
 export var max_hp := 3
 
 onready var char_sprite := $GFX/AnimatedSprite
@@ -15,6 +15,7 @@ onready var gfx_scale = gfx.scale.x
 onready var center_position := position.x
 onready var audio_player := $AudioStreamPlayer2D
 onready var animation_player := $AnimationPlayer
+onready var spawn_position := $CamaraContainer/Camera2D/Position2D
 
 var top_direction = Vector2(0, -1)
 var last_tap_action = null

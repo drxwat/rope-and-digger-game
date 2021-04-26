@@ -3,7 +3,8 @@ extends KinematicBody2D
 onready var attack_timer := $AttackTimer 
 
 var is_attacking := false
-var velocity := Vector2(0, -200)
+var speed := 350
+var velocity := Vector2(0, -speed)
 var gravity := 250
 var attack_duration := 3
 

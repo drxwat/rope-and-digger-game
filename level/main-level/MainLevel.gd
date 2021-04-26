@@ -2,6 +2,8 @@ extends Node2D
 
 export var platform_spawn_time := 3
 export var spikes_probability := 0.3
+export var mooving_platform_probability := 0.4
+export var platform_speed_range := Vector2(150, 350)
 
 onready var bg1 : Background = $Backgrounds/Background1
 onready var bottom_bg : Background = $Backgrounds/Background3
@@ -42,15 +44,15 @@ func spawn_platform():
 func spawn_bat():
 	var bat = bat_sceene.instance()
 	var y_position = get_viewport().size.y
-	bat.position = Vector2(500, player.position.y + (y_position / 2) - 100)
+	bat.gravity = player.gravity - 100
+	bat.position = Vector2(rng.randf_range(50, bg_width - 50), player.spawn_position.global_position.y)
 	add_child(bat)
-	print(bat.position)
-	print(player.position)
-	
-	
 	
 func _place_random_platrom() -> Node2D:
 	var platform =  platforms[PlatfromsTypes.SIMPLE].instance()
+	platform.move_amplitude = bg_width
+	platform.move_speed = rng.randf_range(platform_speed_range.x, platform_speed_range.y)
+	platform.is_mooving = rng.randf_range(0, 1) > mooving_platform_probability
 	var distance_to_player = bottom_bg.position.y - player.position.y
 	var margin_bottom = player_to_bottom_bg_normal_dist - distance_to_player
 	var platform_y_position = margin_bottom + bottom_bg.position.y
