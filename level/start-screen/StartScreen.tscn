@@ -141,7 +141,6 @@ flip_h = true
 position = Vector2( 312.75, 800.392 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 flip_h = true
 
@@ -149,7 +148,6 @@ flip_h = true
 position = Vector2( 511.817, 800.392 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 flip_h = true
 

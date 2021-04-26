@@ -6,7 +6,7 @@ export var mooving_platform_probability := 0.4
 export var platform_speed_range := Vector2(150, 350)
 export var platform_spawn_distance := 450.0 
 export var pattern_spawn_distance := 1500.0
-export var bat_timeout := 6
+export var bat_timeout := 10
 
 onready var bg1 : Background = $Backgrounds/Background1
 onready var bottom_bg : Background = $Backgrounds/Background3
@@ -21,7 +21,7 @@ var complexity_change = {
 	"platform_speed_range": Vector2(50, 50),
 	"platform_spawn_distance": -30,
 	"bat_timeout": -1,
-	"bat_start_level": 3,
+	"bat_start_level": 4,
 	"two_bats_start_level": 7,
 }
 
@@ -59,6 +59,7 @@ func _ready():
 	bg_height = $Backgrounds/Background1.texture.get_size().y * $Backgrounds/Background1.scale.y
 	bg_width =  $Backgrounds/Background1.texture.get_size().x * $Backgrounds/Background1.scale.x
 	player_to_bottom_bg_normal_dist = bottom_bg.position.y - player.position.y
+	show_level_overlay()
 
 func _physics_process(delta):
 	if player.position.y >= next_platform_y:
@@ -77,17 +78,6 @@ func check_for_level_up(coins):
 		increese_complexity()
 		show_level_overlay()
 
-#var complexity_change = {
-#	"spikes_probability": 0.1,
-#	"side_spikes_probability": 0.1,
-#	"mooving_platform_probability": 0.05,
-#	"platform_speed_range": 50,
-#	"platform_spawn_distance": -30,
-#	"bat_timeout": -0.5,
-#	"bat_start_level": 3,
-#	"two_bats_start_level": 7,
-#}
-
 func increese_complexity():
 	spikes_probability += complexity_change.spikes_probability
 	side_spikes_probability += complexity_change.side_spikes_probability
@@ -101,7 +91,7 @@ func increese_complexity():
 		spawn_two_bats = true
 	
 func show_level_overlay():
-	pass
+	$CanvasLayer/LevelOverLay.show_level(level)
 
 func level_up_player():
 	var next_fibonacci = coins_level + next_coins_level
