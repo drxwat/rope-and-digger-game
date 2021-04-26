@@ -46,3 +46,4 @@ func set_right_move_target():
 func set_left_move_target():
 	move_dir = 0
 	move_target = Vector2(width, position.y)
+	

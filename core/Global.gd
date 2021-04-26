@@ -31,7 +31,7 @@ func toggle_pause():
 	get_tree().paused = show_pause_sceen
 
 func start_new_game():
-	is_game_started = true
+	var is_game_started = false
 	goto_scene(game_scene)
 
 func exit_game():

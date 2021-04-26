@@ -4,8 +4,13 @@ var heart_empty := preload("res://assets/heart_empty.png")
 var heart_full := preload("res://assets/heart_full.png")
 
 var is_initilized := false
+var max_hp
 
 func _initialize(hp):
+	max_hp = hp
+	for n in get_children():
+		remove_child(n)
+		n.queue_free()
 	for i in range(hp):
 		var texture_rect = TextureRect.new()
 		texture_rect.expand = true
@@ -17,7 +22,7 @@ func _initialize(hp):
 	is_initilized = true
 	
 func update_health(value):
-	if not is_initilized:
+	if not is_initilized or value > max_hp:
 		_initialize(value)
 	for i in get_child_count():
 		var child = get_child(i)

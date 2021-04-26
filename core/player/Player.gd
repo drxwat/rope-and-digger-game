@@ -3,6 +3,7 @@ class_name Player
 
 signal coin_collected
 signal hp_changed
+signal dead
 
 export var speed := 300
 export var gravity := 350
@@ -22,12 +23,15 @@ var last_tap_action = null
 var coins := 0
 var hp := max_hp
 var take_damage_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_Damage.wav")
+var level_up_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_PowerUp.wav")
 var is_invulnarable := false
 
 func _ready():
 	emit_signal("hp_changed", hp)
 
 func _physics_process(delta):
+	if hp <= 0:
+		return
 	var move_dir := Vector2(0, gravity)
 	if Input.is_action_pressed("move_left"):
 		move_dir += Vector2(-speed, 0)
@@ -50,6 +54,20 @@ func _physics_process(delta):
 	
 	move_and_slide(move_dir, top_direction)
 	
+func die_from_screen():
+	hp = 0
+	emit_signal("hp_changed", 0)
+	die()
+
+func level_up():
+	max_hp += 1
+	hp = max_hp
+	is_invulnarable = true
+	_play_sfx(level_up_sfx)
+	emit_signal("hp_changed", hp)
+	yield($AudioStreamPlayer2D, "finished")
+	is_invulnarable = false
+
 func take_damage():
 	if is_invulnarable:
 		return
@@ -61,11 +79,23 @@ func take_damage():
 	var animation_name = yield(animation_player, "animation_finished")
 	if animation_name == "take_damage":
 		is_invulnarable = false
+	if hp <= 0:
+		die()
+
+func die():
+	is_invulnarable = true
+	animation_player.play("die")
+	yield(animation_player, "animation_finished")
+	emit_signal("dead")
 
 func pick_up(body: Node2D):
 	if body is Coin:
 		body.pick_up()
 		coins += 1
+		emit_signal("coin_collected", coins)
+	if body is Cristall:
+		body.pick_up()
+		coins += 10
 		emit_signal("coin_collected", coins)
 		
 func _play_sfx(stream: AudioStream):

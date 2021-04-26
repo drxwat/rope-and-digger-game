@@ -7,53 +7,53 @@
 [ext_resource path="res://assets/fonts/original/joystix monospace.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://level/start-screen/StartScreen.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=1]
 size = 80
 font_data = ExtResource( 5 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
 } ]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
 region = Rect2( 80, 0, 16, 24 )
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -97,7 +97,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
 margin_right = 620.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 1 )
 text = "rope"
 align = 1
 __meta__ = {
@@ -108,7 +108,7 @@ __meta__ = {
 margin_top = 100.0
 margin_right = 620.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 1 )
 text = "&"
 align = 1
 __meta__ = {
@@ -119,7 +119,7 @@ __meta__ = {
 margin_top = 200.0
 margin_right = 620.0
 margin_bottom = 296.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 1 )
 text = "digger"
 align = 1
 __meta__ = {
@@ -133,24 +133,23 @@ margin_bottom = 974.0
 [node name="Char" type="AnimatedSprite" parent="MarginContainer/HBoxContainer"]
 position = Vector2( 99.7747, 800.392 )
 scale = Vector2( 10, 10 )
-frames = SubResource( 3 )
-frame = 1
+frames = SubResource( 4 )
 playing = true
 flip_h = true
 
 [node name="Coin" type="AnimatedSprite" parent="MarginContainer/HBoxContainer"]
 position = Vector2( 312.75, 800.392 )
 scale = Vector2( 10, 10 )
-frames = SubResource( 10 )
-frame = 2
+frames = SubResource( 11 )
+frame = 1
 playing = true
 flip_h = true
 
 [node name="Coin2" type="AnimatedSprite" parent="MarginContainer/HBoxContainer"]
 position = Vector2( 511.817, 800.392 )
 scale = Vector2( 10, 10 )
-frames = SubResource( 10 )
-frame = 2
+frames = SubResource( 11 )
+frame = 1
 playing = true
 flip_h = true
 
