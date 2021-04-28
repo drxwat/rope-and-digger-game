@@ -36,11 +36,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_left"):
 		move_dir += Vector2(-speed, 0)
 		gfx.scale.x = gfx_scale
-#		char_sprite.flip_h = false
 	elif Input.is_action_pressed("move_right"):
 		move_dir += Vector2(speed, 0)
 		gfx.scale.x = -gfx_scale
-#		char_sprite.flip_h = true
 
 	if is_on_floor() and move_dir.x != 0:
 		char_sprite.play("run")
