@@ -20,6 +20,7 @@ onready var spawn_position := $CamaraContainer/Camera2D/Position2D
 
 var top_direction = Vector2(0, -1)
 var last_tap_action = null
+var last_tap_finger_idx = null
 var coins := 0
 var hp := max_hp
 var take_damage_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_Damage.wav")
@@ -113,15 +114,19 @@ func _input(event):
 			return
 		elif last_tap_action:
 			_cancel_last_tap_action()
-		_emit_tap_action(action)
+		_emit_tap_action(action, event.index)
 	elif event is InputEventScreenTouch and last_tap_action:
-		_cancel_last_tap_action()
+		_cancel_last_tap_action(event.index)
 
-func _emit_tap_action(action):
+func _emit_tap_action(action, finger_idx = null):
+	if finger_idx != null:
+		last_tap_finger_idx = finger_idx
 	last_tap_action = action
 	_emit_tap_action_event(action, true)
 
-func _cancel_last_tap_action():
+func _cancel_last_tap_action(finger_idx = null):
+	if finger_idx != null and last_tap_finger_idx != finger_idx:
+		return
 	_emit_tap_action_event(last_tap_action, false)
 	last_tap_action = null
 
