@@ -1,12 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://level/main-level/MainLevel.gd" type="Script" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://core/coin/Coin.tscn" type="PackedScene" id=3]
-[ext_resource path="res://core/platforms/platform-simple/PlatformSimple.tscn" type="PackedScene" id=4]
 [ext_resource path="res://core/background/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://core/ui/hud/HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://core/spikes/Spikes.tscn" type="PackedScene" id=7]
 [ext_resource path="res://core/ui/pause-overlay/PauseOverlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://core/ui/dead-overlay/DeadOverlay.tscn" type="PackedScene" id=9]
 [ext_resource path="res://core/ui/level-overlay/NewLevelOverLay.tscn" type="PackedScene" id=10]
@@ -40,22 +37,9 @@ position = Vector2( 0, 2160 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="PlatformSimple2" parent="Platforms" instance=ExtResource( 4 )]
-position = Vector2( 553.883, 1738.83 )
-
-[node name="Coin2" parent="Platforms/PlatformSimple2" instance=ExtResource( 3 )]
-position = Vector2( -15.3423, -97.5503 )
-
-[node name="Spikes" parent="Platforms/PlatformSimple2" instance=ExtResource( 7 )]
-position = Vector2( 100, 5 )
-rotation = 1.5708
-
-[node name="Spikes2" parent="Platforms/PlatformSimple2" instance=ExtResource( 7 )]
-position = Vector2( -100, 5 )
-rotation = -1.5708
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 360.278, 902.884 )
+speed = 350
 
 [node name="Timers" type="Node" parent="."]
 
@@ -64,6 +48,7 @@ wait_time = 6.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -10.0
 autoplay = true
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]

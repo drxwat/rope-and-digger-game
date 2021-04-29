@@ -14,7 +14,7 @@ func _initialize(hp):
 	for i in range(hp):
 		var texture_rect = TextureRect.new()
 		texture_rect.expand = true
-		texture_rect.rect_min_size = Vector2(39, 39)
+		texture_rect.rect_min_size = Vector2(77, 77)
 		texture_rect.size_flags_horizontal = SIZE_EXPAND_FILL
 		texture_rect.size_flags_vertical = SIZE_EXPAND_FILL
 		texture_rect.texture = heart_full
