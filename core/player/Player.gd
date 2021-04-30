@@ -22,12 +22,14 @@ var top_direction = Vector2(0, -1)
 var last_tap_action = null
 var last_tap_finger_idx = null
 var coins := 0
-var hp := max_hp
+var hp: int
 var take_damage_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_Damage.wav")
 var level_up_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_PowerUp.wav")
 var is_invulnarable := false
+var limit_hp := 5
 
 func _ready():
+	hp = max_hp
 	emit_signal("hp_changed", hp)
 
 func _physics_process(delta):
@@ -59,7 +61,9 @@ func die_from_screen():
 	die()
 
 func level_up():
-	max_hp += 1
+	max_hp = clamp(max_hp + 1, max_hp, limit_hp)
+
+func heal():
 	hp = max_hp
 	is_invulnarable = true
 	_play_sfx(level_up_sfx)

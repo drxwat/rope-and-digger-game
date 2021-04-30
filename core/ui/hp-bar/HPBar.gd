@@ -5,6 +5,9 @@ var heart_full := preload("res://assets/heart_full.png")
 
 var is_initilized := false
 var max_hp
+var min_size := 32.0
+var max_size := 48.0
+var width = 550
 
 func _initialize(hp):
 	max_hp = hp
@@ -14,7 +17,7 @@ func _initialize(hp):
 	for i in range(hp):
 		var texture_rect = TextureRect.new()
 		texture_rect.expand = true
-		texture_rect.rect_min_size = Vector2(77, 77)
+		texture_rect.rect_min_size = Vector2(max_size, max_size)
 		texture_rect.size_flags_horizontal = SIZE_EXPAND_FILL
 		texture_rect.size_flags_vertical = SIZE_EXPAND_FILL
 		texture_rect.texture = heart_full
@@ -30,3 +33,4 @@ func update_health(value):
 			child.texture = heart_full
 		else:
 			child.texture = heart_empty
+		

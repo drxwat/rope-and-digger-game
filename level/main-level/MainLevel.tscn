@@ -50,6 +50,7 @@ wait_time = 6.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
+[connection signal="level_requirement_changed" from="." to="CanvasLayer/HUD" method="update_coins_requirements"]
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]

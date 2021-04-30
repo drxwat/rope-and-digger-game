@@ -1,5 +1,7 @@
 extends Node2D
 
+signal level_requirement_changed
+
 export var top_spikes_probability := 0.05
 export var side_spikes_probability := 0.05
 export var mooving_platform_probability := 0.4
@@ -76,6 +78,7 @@ func _ready():
 	bg_height = $Backgrounds/Background1.texture.get_size().y * $Backgrounds/Background1.scale.y
 	bg_width =  $Backgrounds/Background1.texture.get_size().x * $Backgrounds/Background1.scale.x
 	player_to_bottom_bg_normal_dist = bottom_bg.position.y - player.position.y
+	emit_signal("level_requirement_changed", coins_level)
 	show_level_overlay()
 
 func _physics_process(delta):
@@ -91,9 +94,16 @@ func _physics_process(delta):
 func check_for_level_up(coins):
 	if coins >= coins_level:
 		level += 1
+		update_level_req()
 		level_up_player()
 		increese_complexity()
 		show_level_overlay()
+
+func update_level_req():
+	var next_fibonacci = coins_level + next_coins_level
+	coins_level = next_coins_level
+	next_coins_level = next_fibonacci
+	emit_signal("level_requirement_changed", coins_level)
 
 func increese_complexity():
 	top_spikes_probability += complexity_change.top_spikes_probability
@@ -106,16 +116,15 @@ func increese_complexity():
 		bat_timer.start()
 	if level >= complexity_change.two_bats_start_level:
 		spawn_two_bats = true
-	
+
 func show_level_overlay():
 	$CanvasLayer/LevelOverLay.show_level(level)
 
 func level_up_player():
-	var next_fibonacci = coins_level + next_coins_level
-	coins_level = next_coins_level
-	next_coins_level = next_fibonacci
-	player.level_up()
-	increese_complexity()
+	player.heal()
+	if level % 2 == 0:
+		player.level_up()
+
 
 func show_game_over():
 	$CanvasLayer/DeadOverlay.show()
