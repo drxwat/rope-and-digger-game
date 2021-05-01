@@ -1,0 +1,4 @@
+#Sat May 01 18:38:11 MSK 2021
+base.0=/home/drxwat/gamedev/rope-and-digger-game/android/build/build/intermediates/dex/release/mergeDexRelease/out/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

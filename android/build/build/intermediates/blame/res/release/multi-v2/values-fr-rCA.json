@@ -1,0 +1,60 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/drxwat/gamedev/rope-and-digger-game/android/build/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fr-rCA/values-fr-rCA.xml",
+            "map": [
+                {
+                    "source": "/home/drxwat/.gradle/caches/transforms-2/files-2.1/939373ae45a8173da41aaae0f2de9e11/jetified-play-services-basement-17.0.0/res/values-fr-rCA/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "251",
+                        "endColumns": "219",
+                        "endOffsets": "470"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "105",
+                        "endColumns": "219",
+                        "endOffsets": "320"
+                    }
+                },
+                {
+                    "source": "/home/drxwat/.gradle/caches/transforms-2/files-2.1/da5d0a994fabfa3be356de2f95b9ba9f/jetified-play-services-ads-19.3.0/res/values-fr-rCA/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10",
+                        "startColumns": "0,0,0,0,0,0,0",
+                        "startOffsets": "203,280,404,470,535,626,741",
+                        "endColumns": "76,123,65,64,90,114,69",
+                        "endOffsets": "279,403,469,534,625,740,810"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "325,406,534,604,673,768,887",
+                        "endColumns": "80,127,69,68,94,118,73",
+                        "endOffsets": "401,529,599,668,763,882,956"
+                    }
+                },
+                {
+                    "source": "/home/drxwat/.gradle/caches/transforms-2/files-2.1/947833f03979c6d84fcd9a8feba7ce42/core-1.0.0/res/values-fr-rCA/values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "961",
+                        "endColumns": "100",
+                        "endOffsets": "1057"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AdMob",
+"language": "GDScript",
+"path": "res://admob-lib/admob.gd"
+}, {
 "base": "Sprite",
 "class": "Background",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://core/player/Player.gd"
 } ]
 _global_script_class_icons={
+"AdMob": "res://admob-lib/icon.png",
 "Background": "",
 "Coin": "",
 "Cristall": "",

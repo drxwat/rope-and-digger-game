@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://level/main-level/MainLevel.gd" type="Script" id=1]
 [ext_resource path="res://core/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=3]
 [ext_resource path="res://core/background/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://core/ui/hud/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://core/ui/pause-overlay/PauseOverlay.tscn" type="PackedScene" id=8]
@@ -50,13 +51,16 @@ wait_time = 6.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 3 )
 [connection signal="level_requirement_changed" from="." to="CanvasLayer/HUD" method="update_coins_requirements"]
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background3" to="." method="move_bg_to_bottom"]
-[connection signal="coin_collected" from="Player" to="." method="check_for_level_up"]
 [connection signal="coin_collected" from="Player" to="CanvasLayer/HUD" method="update_coins_counter"]
+[connection signal="coin_collected" from="Player" to="." method="check_for_level_up"]
 [connection signal="dead" from="Player" to="." method="show_game_over"]
 [connection signal="hp_changed" from="Player" to="CanvasLayer/HUD" method="update_hp"]
 [connection signal="timeout" from="Timers/BatTimer" to="." method="spawn_bat"]
