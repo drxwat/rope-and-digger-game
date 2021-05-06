@@ -19,6 +19,7 @@ onready var bottom_bg : Background = $Backgrounds/Background3
 onready var platforms_container := $Platforms
 onready var player := $Player
 onready var bat_timer := $Timers/BatTimer
+onready var admob := $AdMob
 
 var complexity_change = {
 	"top_spikes_probability": 0.05,
@@ -30,6 +31,8 @@ var complexity_change = {
 	"bat_start_level": 4,
 	"two_bats_start_level": 7,
 }
+
+var is_addmob_loaded := false
 
 var bg_height : float = 0
 var bg_width : float = 0
@@ -80,6 +83,7 @@ func _ready():
 	player_to_bottom_bg_normal_dist = bottom_bg.position.y - player.position.y
 	emit_signal("level_requirement_changed", coins_level)
 	show_level_overlay()
+	admob.load_interstitial()
 
 func _physics_process(delta):
 	if player.position.y >= next_platform_y:
@@ -125,8 +129,20 @@ func level_up_player():
 	if level % 2 == 0:
 		player.level_up()
 
-
 func show_game_over():
+	if is_addmob_loaded:
+		admob.show_interstitial()
+	else:
+		show_dead_oberlay()
+
+func on_interstitial_failed(error_code):
+	is_addmob_loaded = false
+	print("ADMOB ERR CODE ", error_code)
+	
+func on_interstitial_loaded():
+	is_addmob_loaded = true
+
+func show_dead_oberlay():
 	$CanvasLayer/DeadOverlay.show()
 	get_tree().paused = true
 

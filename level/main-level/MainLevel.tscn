@@ -54,6 +54,9 @@ autoplay = true
 
 [node name="AdMob" type="Node" parent="."]
 script = ExtResource( 3 )
+is_real = true
+interstitial_id = "ca-app-pub-8214253275781025/1665972050"
+is_personalized = false
 
 [connection signal="level_requirement_changed" from="." to="CanvasLayer/HUD" method="update_coins_requirements"]
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
@@ -65,3 +68,6 @@ script = ExtResource( 3 )
 [connection signal="dead" from="Player" to="." method="show_game_over"]
 [connection signal="hp_changed" from="Player" to="CanvasLayer/HUD" method="update_hp"]
 [connection signal="timeout" from="Timers/BatTimer" to="." method="spawn_bat"]
+[connection signal="interstitial_closed" from="AdMob" to="." method="show_dead_oberlay"]
+[connection signal="interstitial_failed_to_load" from="AdMob" to="." method="on_interstitial_failed"]
+[connection signal="interstitial_loaded" from="AdMob" to="." method="on_interstitial_loaded"]
