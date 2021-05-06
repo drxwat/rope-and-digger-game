@@ -144,5 +144,6 @@ anims/take_damage = SubResource( 9 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -45, -40, 90, 90 )
+
 [connection signal="body_entered" from="PickUpArea" to="." method="pick_up"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="die_from_screen"]

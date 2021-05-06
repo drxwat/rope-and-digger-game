@@ -4,6 +4,7 @@ class_name Player
 signal coin_collected
 signal hp_changed
 signal dead
+signal moving_to
 
 export var speed := 300
 export var gravity := 350
@@ -26,7 +27,7 @@ var hp: int
 var take_damage_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_Damage.wav")
 var level_up_sfx : AudioStream = preload("res://assets/sfx_and_music/player_Take_PowerUp.wav")
 var is_invulnarable := false
-var limit_hp := 5
+var limit_hp := 7
 
 func _ready():
 	hp = max_hp
@@ -53,6 +54,7 @@ func _physics_process(delta):
 	elif camera.position.y > 0:
 		 camera.position += Vector2(0, - gravity / 4 * delta)
 	
+	emit_signal("moving_to", move_dir)
 	move_and_slide(move_dir, top_direction)
 	
 func die_from_screen():

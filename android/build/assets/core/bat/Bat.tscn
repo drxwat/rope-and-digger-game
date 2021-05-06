@@ -57,13 +57,16 @@ shape = SubResource( 2 )
 rect = Rect2( -40, -40, 80, 80 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 3, 3, 3, 1 )
 position = Vector2( 0, -29.921 )
 scale = Vector2( 10, 10 )
 frames = SubResource( 8 )
+frame = 2
 playing = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
+
 [connection signal="body_entered" from="Damager" to="." method="damage_player"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="remove"]
 [connection signal="timeout" from="AttackTimer" to="." method="start_attack"]

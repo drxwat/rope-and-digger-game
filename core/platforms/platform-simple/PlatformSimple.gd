@@ -41,9 +41,9 @@ func init_randonm_move_target():
 
 func set_right_move_target():
 	move_dir = 1
-	move_target = Vector2(move_amplitude - width, position.y)
+	move_target = Vector2(move_amplitude - (width / 2), position.y)
 	
 func set_left_move_target():
 	move_dir = 0
-	move_target = Vector2(width, position.y)
+	move_target = Vector2(width / 2, position.y)
 	

@@ -67,6 +67,7 @@ is_personalized = false
 [connection signal="coin_collected" from="Player" to="CanvasLayer/HUD" method="update_coins_counter"]
 [connection signal="dead" from="Player" to="." method="show_game_over"]
 [connection signal="hp_changed" from="Player" to="CanvasLayer/HUD" method="update_hp"]
+[connection signal="moving_to" from="Player" to="CanvasLayer/HUD" method="update_move_dir"]
 [connection signal="timeout" from="Timers/BatTimer" to="." method="spawn_bat"]
 [connection signal="interstitial_closed" from="AdMob" to="." method="show_dead_oberlay"]
 [connection signal="interstitial_failed_to_load" from="AdMob" to="." method="on_interstitial_failed"]

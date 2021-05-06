@@ -80,8 +80,9 @@ shape = SubResource( 1 )
 scale = Vector2( 5.5, 5.5 )
 frames = SubResource( 14 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="PickUpPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -10.0

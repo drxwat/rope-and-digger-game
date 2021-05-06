@@ -22,11 +22,11 @@ onready var bat_timer := $Timers/BatTimer
 onready var admob := $AdMob
 
 var complexity_change = {
-	"top_spikes_probability": 0.05,
-	"side_spikes_probability": 0.05,
-	"mooving_platform_probability": 0.05,
+	"top_spikes_probability": 0.1,
+	"side_spikes_probability": 0.1,
+	"mooving_platform_probability": 0.1,
 	"platform_speed_range": Vector2(25, 25),
-	"platform_spawn_distance": -10,
+	"platform_spawn_distance": -15,
 	"bat_timeout": -1,
 	"bat_start_level": 4,
 	"two_bats_start_level": 7,
@@ -121,13 +121,17 @@ func increese_complexity():
 	if level >= complexity_change.two_bats_start_level:
 		spawn_two_bats = true
 
+func is_max_hp_rise_level() -> bool:
+	return level % 3 == 0
+
 func show_level_overlay():
-	$CanvasLayer/LevelOverLay.show_level(level)
+	var show_reward = is_max_hp_rise_level() and player.max_hp <= player.limit_hp
+	$CanvasLayer/LevelOverLay.show_level(level, show_reward)
 
 func level_up_player():
-	player.heal()
-	if level % 2 == 0:
+	if is_max_hp_rise_level():
 		player.level_up()
+	player.heal()
 
 func show_game_over():
 	if is_addmob_loaded:
