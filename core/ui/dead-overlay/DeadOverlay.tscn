@@ -13,13 +13,13 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 360.0
-margin_top = 512.0
-margin_right = 360.0
-margin_bottom = 512.0
+visible = false
+margin_right = 720.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 720, 1024 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.33, 0.33, 0.33, 0.5 )
+color = Color( 0.329412, 0.329412, 0.329412, 0.501961 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 89.0
