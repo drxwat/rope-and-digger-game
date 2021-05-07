@@ -15,14 +15,15 @@ script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 6 )]
-
-[node name="PauseOverlay" parent="CanvasLayer" instance=ExtResource( 8 )]
-visible = false
-
 [node name="LevelOverLay" parent="CanvasLayer" instance=ExtResource( 10 )]
 
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 6 )]
+
 [node name="DeadOverlay" parent="CanvasLayer" instance=ExtResource( 9 )]
+pause_mode = 2
+visible = false
+
+[node name="PauseOverlay" parent="CanvasLayer" instance=ExtResource( 8 )]
 pause_mode = 2
 visible = false
 
@@ -60,6 +61,7 @@ is_personalized = false
 
 [connection signal="level_requirement_changed" from="." to="CanvasLayer/HUD" method="update_coins_requirements"]
 [connection signal="restart_game" from="CanvasLayer/DeadOverlay" to="." method="restart_level"]
+[connection signal="restart_game" from="CanvasLayer/PauseOverlay" to="." method="restart_level"]
 [connection signal="screen_exited" from="Backgrounds/Background1" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background2" to="." method="move_bg_to_bottom"]
 [connection signal="screen_exited" from="Backgrounds/Background3" to="." method="move_bg_to_bottom"]

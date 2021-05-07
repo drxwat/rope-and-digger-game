@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/fontMainScreen.tres" type="DynamicFont" id=1]
 [ext_resource path="res://core/ui/level-overlay/NewLevelOverLay.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/font32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/heart_full.png" type="Texture" id=4]
+[ext_resource path="res://assets/sfx_and_music/player_Take_PowerUp.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_level"
@@ -78,3 +79,6 @@ expand = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/show_level = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )

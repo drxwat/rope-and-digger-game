@@ -20,6 +20,7 @@ onready var platforms_container := $Platforms
 onready var player := $Player
 onready var bat_timer := $Timers/BatTimer
 onready var admob := $AdMob
+onready var level_overlay := $CanvasLayer/LevelOverLay
 
 var complexity_change = {
 	"top_spikes_probability": 0.1,
@@ -30,6 +31,7 @@ var complexity_change = {
 	"bat_timeout": -1,
 	"bat_start_level": 4,
 	"two_bats_start_level": 7,
+	"gravity": 15,
 }
 
 var is_addmob_loaded := false
@@ -45,6 +47,7 @@ var level := 1
 var coins_level := 50
 var next_coins_level := 100
 var spawn_two_bats := false
+var record_achieved := false
 
 enum PlatformTypes { SIMPLE, SIDE_SPIKES, TOP_SPIKES, TOP_SIDE_SPIKES }
 
@@ -71,7 +74,8 @@ var bat_sceene = preload("res://core/bat/Bat.tscn")
 var coin_patterns = {
 	0: preload("res://core/coin/pattern-1/CoinPattern1.tscn"),
 	1: preload("res://core/coin/pattern-2/CoinPattern2.tscn"),
-	2: preload("res://core/coin/pattern-3/CoinPattern3.tscn")
+	2: preload("res://core/coin/pattern-3/CoinPattern3.tscn"),
+	3: preload("res://core/coin/pattern-4/CoinPattern4.tscn"),
 }
 
 func _ready():
@@ -95,13 +99,21 @@ func _physics_process(delta):
 		next_pattern_y = player.position.y + pattern_spawn_distance
 
 
-func check_for_level_up(coins):
+func check_for_level_up(coins: int):
+	check_for_new_record(coins)
 	if coins >= coins_level:
 		level += 1
 		update_level_req()
 		level_up_player()
 		increese_complexity()
 		show_level_overlay()
+		
+func check_for_new_record(coins: int):
+	if Global.record == 0 or record_achieved:
+		return
+	if coins > Global.record:
+		record_achieved = true
+		level_overlay.show_message("New Record")
 
 func update_level_req():
 	var next_fibonacci = coins_level + next_coins_level
@@ -115,6 +127,7 @@ func increese_complexity():
 	mooving_platform_probability += complexity_change.mooving_platform_probability
 	platform_speed_range += complexity_change.platform_speed_range
 	platform_spawn_distance += complexity_change.platform_spawn_distance
+	player.gravity += complexity_change.gravity
 	if level >= complexity_change.bat_start_level:
 		bat_timer.wait_time += complexity_change.bat_timeout
 		bat_timer.start()
@@ -126,7 +139,7 @@ func is_max_hp_rise_level() -> bool:
 
 func show_level_overlay():
 	var show_reward = is_max_hp_rise_level() and player.max_hp <= player.limit_hp
-	$CanvasLayer/LevelOverLay.show_level(level, show_reward)
+	level_overlay.show_level(level, show_reward)
 
 func level_up_player():
 	if is_max_hp_rise_level():
@@ -134,6 +147,8 @@ func level_up_player():
 	player.heal()
 
 func show_game_over():
+	if player.coins > Global.record:
+		Global.update_record(player.coins)
 	if is_addmob_loaded:
 		admob.show_interstitial()
 	else:
@@ -147,6 +162,7 @@ func on_interstitial_loaded():
 	is_addmob_loaded = true
 
 func show_dead_oberlay():
+	$CanvasLayer/DeadOverlay.set_score(player.coins, record_achieved)
 	$CanvasLayer/DeadOverlay.show()
 	get_tree().paused = true
 
@@ -159,7 +175,7 @@ func move_bg_to_bottom(background: Background):
 	bottom_bg = background
 
 func spawn_coin_pattern():
-	var pattern_i = rng.randi_range(0, 2)
+	var pattern_i = rng.randi_range(0, 3)
 	var pattern = coin_patterns[pattern_i].instance()
 	var distance_to_player = bottom_bg.position.y - player.position.y
 	var margin_bottom = player_to_bottom_bg_normal_dist - distance_to_player

@@ -6,9 +6,9 @@
 [node name="PlatformS-SS" instance=ExtResource( 2 )]
 
 [node name="Spikes" parent="." index="3" instance=ExtResource( 1 )]
-position = Vector2( 70, 5 )
+position = Vector2( 70, 10 )
 rotation = 1.5708
 
 [node name="Spikes2" parent="." index="4" instance=ExtResource( 1 )]
-position = Vector2( -70, 5 )
+position = Vector2( -70, 10 )
 rotation = -1.5708

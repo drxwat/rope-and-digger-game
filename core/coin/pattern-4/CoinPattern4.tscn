@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://core/coin/CoinPattern.gd" type="Script" id=1]
+[ext_resource path="res://core/coin/Coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://core/cristall/Cristall.tscn" type="PackedScene" id=3]
+
+[node name="CoinPattern4" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Coin" parent="." instance=ExtResource( 2 )]
+position = Vector2( 48.2076, 72.6532 )
+
+[node name="Coin2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 138.208, 160.653 )
+
+[node name="Coin3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 240.208, 248.653 )
+
+[node name="Coin7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 662.208, 72.6532 )
+
+[node name="Coin8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 560.208, 160.653 )
+
+[node name="Coin9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 450.208, 248.653 )
+
+[node name="Coin4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 454.208, 436.653 )
+
+[node name="Coin5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 564.208, 520.653 )
+
+[node name="Coin6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 670.208, 608.653 )
+
+[node name="Coin10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 238.208, 436.653 )
+
+[node name="Coin11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 154.208, 520.653 )
+
+[node name="Coin12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 44.2076, 608.653 )
+
+[node name="Cristall" parent="." instance=ExtResource( 3 )]
+position = Vector2( 344.676, 340.576 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( 0, 0, 720, 700 )

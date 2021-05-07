@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://core/ui/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://core/ui/coin-counter/CoinCounter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://core/ui/hp-bar/HPBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/straight-right-arrow.png" type="Texture" id=4]
 [ext_resource path="res://assets/straight-left-arrow.png" type="Texture" id=5]
+[ext_resource path="res://assets/pause.png" type="Texture" id=6]
 
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
@@ -16,22 +17,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Grid" type="VBoxContainer" parent="."]
-margin_right = 670.0
-margin_bottom = 999.0
-
-[node name="Row1" type="HBoxContainer" parent="Grid"]
-margin_right = 670.0
-margin_bottom = 40.0
-
-[node name="HPBar" parent="Grid/Row1" instance=ExtResource( 3 )]
-margin_bottom = 40.0
-size_flags_vertical = 3
-
-[node name="CoinCounter" parent="Grid/Row1" instance=ExtResource( 2 )]
-margin_left = 4.0
-margin_right = 670.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 670.0
@@ -58,3 +43,38 @@ margin_left = 385.0
 margin_right = 641.0
 margin_bottom = 256.0
 texture = ExtResource( 4 )
+
+[node name="Grid" type="VBoxContainer" parent="."]
+margin_right = 670.0
+margin_bottom = 999.0
+custom_constants/separation = 15
+
+[node name="Row1" type="HBoxContainer" parent="Grid"]
+margin_right = 670.0
+margin_bottom = 40.0
+
+[node name="HPBar" parent="Grid/Row1" instance=ExtResource( 3 )]
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 0
+
+[node name="Pause" type="HBoxContainer" parent="Grid/Row1"]
+margin_left = 4.0
+margin_right = 670.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureButton" type="TextureButton" parent="Grid/Row1/Pause"]
+margin_left = 626.0
+margin_right = 666.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 6 )
+
+[node name="CoinCounter" parent="Grid" instance=ExtResource( 2 )]
+margin_top = 55.0
+margin_right = 670.0
+margin_bottom = 95.0
+alignment = 0
+
+[connection signal="pressed" from="Grid/Row1/Pause/TextureButton" to="." method="on_pause"]

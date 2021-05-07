@@ -9,9 +9,9 @@
 position = Vector2( 0, -33 )
 
 [node name="Spikes2" parent="." index="4" instance=ExtResource( 1 )]
-position = Vector2( 70, 5 )
+position = Vector2( 70, 10 )
 rotation = 1.5708
 
 [node name="Spikes3" parent="." index="5" instance=ExtResource( 1 )]
-position = Vector2( -70, 5 )
+position = Vector2( -70, 10 )
 rotation = -1.5708

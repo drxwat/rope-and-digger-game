@@ -104,7 +104,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 5, 5 )
 frames = SubResource( 11 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="PickUpPlayer" type="AudioStreamPlayer2D" parent="."]

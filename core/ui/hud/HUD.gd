@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var coin_counter := $Grid/Row1/CoinCounter
+onready var coin_counter := $Grid/CoinCounter
 onready var hp_bar := $Grid/Row1/HPBar
 onready var left_arrow := $VBoxContainer/Controlls/Left
 onready var right_arrow := $VBoxContainer/Controlls/Right
@@ -27,3 +27,6 @@ func update_move_dir(direction: Vector2):
 	else:
 		right_arrow.modulate = default_color
 		left_arrow.modulate = default_color
+
+func on_pause():
+	Global.toggle_pause()

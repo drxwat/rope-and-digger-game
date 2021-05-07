@@ -50,9 +50,9 @@ func _physics_process(delta):
 		char_sprite.play("idle")
 	
 	if is_on_floor():
-		camera.position += Vector2(0, gravity / 2 * delta)
+		camera.position += Vector2(0, gravity / 1.5 * delta)
 	elif camera.position.y > 0:
-		 camera.position += Vector2(0, - gravity / 4 * delta)
+		 camera.position += Vector2(0, - gravity / 3 * delta)
 	
 	emit_signal("moving_to", move_dir)
 	move_and_slide(move_dir, top_direction)
