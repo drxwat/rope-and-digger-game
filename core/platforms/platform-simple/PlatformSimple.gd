@@ -22,6 +22,8 @@ func _physics_process(delta):
 	if position.distance_to(move_target) <= 5:
 		update_move_targer()
 	move_and_slide(position.direction_to(move_target) * move_speed)
+	if (is_on_wall()):
+		update_move_targer()
 
 func on_screen_exited():
 	queue_free()

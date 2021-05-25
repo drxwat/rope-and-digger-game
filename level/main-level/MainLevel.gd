@@ -23,9 +23,9 @@ onready var admob := $AdMob
 onready var level_overlay := $CanvasLayer/LevelOverLay
 
 var complexity_change = {
-	"top_spikes_probability": 0.1,
+	"top_spikes_probability": 0.01,
 	"side_spikes_probability": 0.1,
-	"mooving_platform_probability": 0.1,
+	"mooving_platform_probability": 0.05,
 	"platform_speed_range": Vector2(25, 25),
 	"platform_spawn_distance": -15,
 	"bat_timeout": -1,
@@ -224,7 +224,7 @@ func _get_random_platform():
 func _place_platform(platform: Node2D) -> void:
 	platform.move_amplitude = bg_width
 	platform.move_speed = rng.randf_range(platform_speed_range.x, platform_speed_range.y)
-	platform.is_mooving = rng.randf_range(0, 1) > mooving_platform_probability
+	platform.is_mooving = rng.randf_range(0, 1) <= mooving_platform_probability
 	var distance_to_player = bottom_bg.position.y - player.position.y
 	var margin_bottom = player_to_bottom_bg_normal_dist - distance_to_player
 	var platform_spawn_deviation = platform_spawn_distance / 3.0
